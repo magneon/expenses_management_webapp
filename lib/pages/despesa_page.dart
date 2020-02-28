@@ -140,7 +140,8 @@ Widget build(BuildContext context) {
       http.Client client = http.Client();
       print(client);
 
-      http.Response response = await client.get("http://192.168.122.1:8080/expense/period/janeiro-2020");
+      http.Response response = await client.get("https://localhost:8080/expense/period/janeiro-2020");
+      print(response.statusCode);
       if (response.statusCode == 200) {
         for (var item in json.decode(utf8.decode(response.bodyBytes))) {
           Expense expense = Expense(item);

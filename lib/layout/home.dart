@@ -75,7 +75,8 @@ class _HomeState extends State<Home> {
   _right() {
     return Container(
       width: !showMenuCollapsed ? size.width - menuWidth : size.width,
-      color: Colors.grey,
+      padding: EdgeInsets.all(20),
+      //color: Colors.red,
       child: Right(),
     );
   }
