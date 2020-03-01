@@ -1,3 +1,4 @@
+import 'package:expenses_management_webapp/layout/breadcrumb.dart';
 import 'package:flutter/material.dart';
 
 import 'package:expenses_management_webapp/layout/north.dart';
@@ -7,6 +8,8 @@ import 'package:expenses_management_webapp/layout/south.dart';
 
 import 'package:expenses_management_webapp/constants.dart';
 import 'package:expenses_management_webapp/utils/color_util.dart';
+
+import '../constants.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -73,11 +76,23 @@ class _HomeState extends State<Home> {
   }
 
   _right() {
-    return Container(
-      width: !showMenuCollapsed ? size.width - menuWidth : size.width,
-      padding: EdgeInsets.all(20),
-      //color: Colors.red,
-      child: Right(),
+    return Column(
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.all(10),
+          width: size.width - menuWidth,
+          height: 50,
+          child: Breadcrumb(),
+        ),
+        Expanded(
+          child: 
+            Container(
+              padding: EdgeInsets.all(10),
+              width: !showMenuCollapsed ? size.width - menuWidth : size.width,              
+              child: Right(),
+            ),
+        )
+      ],
     );
   }
 

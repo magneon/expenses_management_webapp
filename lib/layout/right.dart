@@ -8,6 +8,6 @@ class Right extends StatelessWidget {
   Widget build(BuildContext context) {
     App app = Provider.of<App>(context);
 
-    return app.page;
+    return app.pages.last.page;
   }
 }
