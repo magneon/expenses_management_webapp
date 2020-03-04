@@ -1,3 +1,5 @@
+import 'package:expenses_management_webapp/layout/breadcrumb.dart';
+import 'package:expenses_management_webapp/layout/debug_layout_size.dart';
 import 'package:flutter/material.dart';
 
 import 'package:expenses_management_webapp/layout/user_content.dart';
@@ -23,6 +25,7 @@ class _NorthState extends State<North> {
     return Column(
       children: <Widget>[
         Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             _menuIcon(),
             Expanded(
@@ -35,6 +38,13 @@ class _NorthState extends State<North> {
           color: Colors.white,
           height: 20,
         ),
+        Expanded(
+          child: Container(
+            alignment: Alignment.centerLeft,
+            child: Breadcrumb(),
+          ),
+        )
+        /*
         Expanded(
           child: Row(
             children: <Widget>[
@@ -53,6 +63,7 @@ class _NorthState extends State<North> {
             ],
           ),
         )
+        */
       ],
     );
   }

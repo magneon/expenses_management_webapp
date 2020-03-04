@@ -1,4 +1,3 @@
-import 'package:expenses_management_webapp/layout/breadcrumb.dart';
 import 'package:flutter/material.dart';
 
 import 'package:expenses_management_webapp/layout/north.dart';
@@ -78,12 +77,14 @@ class _HomeState extends State<Home> {
   _right() {
     return Column(
       children: <Widget>[
+        /*
         Container(
           padding: EdgeInsets.all(10),
-          width: size.width - menuWidth,
+          width: !showMenuCollapsed ? size.width - menuWidth : size.width,
           height: 50,
           child: Breadcrumb(),
         ),
+        */
         Expanded(
           child: 
             Container(

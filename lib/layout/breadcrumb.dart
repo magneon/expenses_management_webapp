@@ -13,6 +13,16 @@ class _BreadcrumbState extends State<Breadcrumb> {
   Widget build(BuildContext context) {
     App app = Provider.of<App>(context);
 
-    return Text("${app.pages.toString()}");
+    List<Widget> breadcrumbItems = List();
+    breadcrumbItems.add(Icon(Icons.home, color: Colors.white));
+
+    for (var page in app.pages) {
+      if (!page.title.contains("Home")) {
+        breadcrumbItems.add(Icon(Icons.arrow_right, color: Colors.white));
+        breadcrumbItems.add(Text("${page.title}", style: TextStyle(color: Colors.white)));
+      }
+    }
+
+    return Row(children: breadcrumbItems);
   }
 }
