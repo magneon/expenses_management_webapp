@@ -9,11 +9,11 @@ class Expense {
 
   Expense(Map json) {
     _id = json["id"];
-    _expenseName = json["expenseName"];
-    _expenseDescription = json["expenseDescription"];
-    _expenseType = json["expenseType"];
-    _expenseValue = json["expenseValue"];
-    _expenseDate = json["expenseDate"];
+    _expenseName = json["name"];
+    _expenseDescription = json["description"];
+    _expenseType = json["type"];
+    _expenseValue = json["value"];
+    _expenseDate = json["date"];
   }
 
   int get getId => _id;
@@ -27,5 +27,10 @@ class Expense {
   double get getExpenseValue => _expenseValue;
 
   String get getExpenseDate => _expenseDate;
+
+  @override
+  String toString() {
+    return "id=[$_id], expenseName=[$_expenseName], expenseDescription=[$_expenseDescription], expenseType=[$_expenseType], expenseValue=[$_expenseValue], expenseDate=[$_expenseDate]";
+  }
 
 }

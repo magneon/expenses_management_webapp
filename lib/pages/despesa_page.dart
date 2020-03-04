@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import 'dart:convert';
@@ -12,8 +14,9 @@ class DespesaPage extends StatefulWidget {
 }
 
 class _DespesaPageState extends State<DespesaPage> {
+
   @override
-Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       body: _body(),
     );
@@ -27,10 +30,11 @@ Widget build(BuildContext context) {
         child: FutureBuilder(
           future: _getDataRows(),
           builder: (context, snapshot) {
-            print(snapshot.data);
-
-            switch (snapshot.connectionState) {
+            switch(snapshot.connectionState) {
               case ConnectionState.done:
+
+                List<DataRow> rows = snapshot.data;
+
                 return Card(
                   elevation: 1,
                   child: DataTable(
@@ -55,72 +59,11 @@ Widget build(BuildContext context) {
                         label: Text("Expense Date"),
                       )
                     ],
-                    rows: [
-                      DataRow(
-                        cells: [
-                          DataCell(Text("1")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                        ]
-                      ),
-                      DataRow(
-                        cells: [
-                          DataCell(Text("1")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                        ]
-                      ),
-                      DataRow(
-                        cells: [
-                          DataCell(Text("1")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                        ]
-                      ),
-                      DataRow(
-                        cells: [
-                          DataCell(Text("1")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                        ]
-                      ),
-                      DataRow(
-                        cells: [
-                          DataCell(Text("1")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                        ]
-                      ),
-                      DataRow(
-                        cells: [
-                          DataCell(Text("1")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                          DataCell(Text("Nome da Despesa")),
-                        ]
-                      )
-                    ],
+                    rows: rows
                   )
                 );
-                break;
 
+                break;
               default:
                 return Center(
                   child: Text("Sem conteúdo"),
@@ -137,25 +80,24 @@ Widget build(BuildContext context) {
     List<DataRow> rows = List();
 
     try {
-      http.Client client = http.Client();
-      print(client);
 
-      http.Response response = await client.get("https://localhost:8080/expense/period/janeiro-2020");
-      print(response.statusCode);
+      Uri uri = Uri.https("gestao-financeira-changeit.herokuapp.com", "expense/period/3/2020");
+
+      http.Response response = await http.get(uri);
       if (response.statusCode == 200) {
+
         for (var item in json.decode(utf8.decode(response.bodyBytes))) {
           Expense expense = Expense(item);
 
-          DataRow dataRow = DataRow(
-            cells: [
-              DataCell(Text(expense.getId.toString())),
-              DataCell(Text(expense.getExpenseName)),
-              DataCell(Text(expense.getExpenseDescription)),
-              DataCell(Text(expense.getExpenseValue.toString())),
-              DataCell(Text(expense.getExpenseType)),
-              DataCell(Text(expense.getExpenseDate)),
-            ]
-          );
+          List<DataCell> cells = List();
+          cells.add(_createDataCell(expense.getId.toString()));
+          cells.add(_createDataCell(expense.getExpenseName));
+          cells.add(_createDataCell(expense.getExpenseDescription));
+          cells.add(_createDataCell(expense.getExpenseValue.toString()));
+          cells.add(_createDataCell(expense.getExpenseType));
+          cells.add(_createDataCell(expense.getExpenseDate));          
+
+          DataRow dataRow = DataRow(cells: cells);
 
           rows.add(dataRow);
         }
@@ -163,8 +105,13 @@ Widget build(BuildContext context) {
     } on Exception catch (e) {
       print(e);
     }
-    
+
+    print(rows);
 
     return rows;
+  }
+
+  _createDataCell(String content) {
+    return DataCell(Text(content));
   }
 }
