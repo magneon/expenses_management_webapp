@@ -43,27 +43,7 @@ class _NorthState extends State<North> {
             alignment: Alignment.centerLeft,
             child: Breadcrumb(),
           ),
-        )
-        /*
-        Expanded(
-          child: Row(
-            children: <Widget>[
-              GestureDetector(
-                child: Icon(Icons.home, color: Colors.white),
-                onTap: () {
-                  print("Voltando pra Home");
-                },
-              ),
-              Row(
-                children: <Widget>[
-                  Icon(Icons.arrow_right, color: Colors.white),
-                  Text(widget.title, style: TextStyle(color: Colors.white))
-                ],
-              )
-            ],
-          ),
-        )
-        */
+        )        
       ],
     );
   }

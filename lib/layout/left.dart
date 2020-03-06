@@ -1,5 +1,7 @@
 import 'package:expenses_management_webapp/models/page_info.dart';
 import 'package:expenses_management_webapp/pages/carro_page.dart';
+import 'package:expenses_management_webapp/pages/info_page.dart';
+import 'package:expenses_management_webapp/pages/upload_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -59,6 +61,8 @@ class _LeftState extends State<Left> {
           _createListTileItem(Icons.account_balance_wallet, "Despesas", DespesaPage()),
           _createListTileItem(Icons.account_box, "Usuários", UsuarioPage()),
           _createListTileItem(Icons.directions_car, "Carros", CarroPage()),
+          _createListTileItem(Icons.info, "Info", InfoPage()),
+          _createListTileItem(Icons.file_upload, "Upload", UploadPage()),
         ],
       )
     );

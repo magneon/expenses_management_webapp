@@ -32,4 +32,18 @@ class App extends ChangeNotifier {
     notifyListeners();
   }
 
+  void popAll() {
+    this.pages.clear();
+
+    this.pages.add(defaultPage);
+
+    notifyListeners();
+  }
+
+  void popTo(int index) {
+    this.pages.removeRange(index + 1, this.pages.length);
+
+    notifyListeners();
+  }
+
 }
